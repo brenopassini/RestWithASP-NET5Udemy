@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RestWithASPNETUdemy.Services.Implementations
+namespace RestWithASPNETUdemy.Repository.Implementations
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
         private SqlServerContext _context;
 
-        public PersonServiceImplementation(SqlServerContext context)
+        public PersonRepositoryImplementation(SqlServerContext context)
         {
             _context = context;
         }
