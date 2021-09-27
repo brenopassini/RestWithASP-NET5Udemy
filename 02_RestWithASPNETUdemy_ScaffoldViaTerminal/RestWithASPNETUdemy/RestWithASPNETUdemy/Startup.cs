@@ -42,6 +42,8 @@ namespace RestWithASPNETUdemy
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithASPNETUdemy", Version = "v1" });
             });
 
+            services.AddApiVersioning();
+
             services.AddScoped<IPersonService, PersonServiceImplementation>();
         }
 

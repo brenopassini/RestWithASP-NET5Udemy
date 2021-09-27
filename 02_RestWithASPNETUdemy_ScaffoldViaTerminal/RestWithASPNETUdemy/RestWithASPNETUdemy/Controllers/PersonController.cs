@@ -10,7 +10,8 @@ using System.Threading.Tasks;
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/[controller]/v{version:apiVersion}")]
     public class PersonController : ControllerBase
     {
         private readonly ILogger<PersonController> _logger;
@@ -31,7 +32,7 @@ namespace RestWithASPNETUdemy.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(long id)
         {
-            var person = _personService.FindByID(1);
+            var person = _personService.FindByID(id);
 
             if (person == null) return NotFound();
             return Ok(person);
