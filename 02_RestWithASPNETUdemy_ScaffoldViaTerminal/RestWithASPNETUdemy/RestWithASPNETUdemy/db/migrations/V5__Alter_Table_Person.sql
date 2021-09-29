@@ -1,0 +1,2 @@
+﻿ALTER TABLE dbo.person
+   ALTER COLUMN id INT

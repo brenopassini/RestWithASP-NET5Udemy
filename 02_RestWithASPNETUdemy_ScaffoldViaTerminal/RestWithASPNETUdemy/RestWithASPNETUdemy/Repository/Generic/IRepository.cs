@@ -1,4 +1,5 @@
 ﻿using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNETUdemy.Repository
 {
-    public interface IPersonRepository
+    public interface IRepository<T> where T : BaseEntity
     {
-        Person Create(Person person);
+        T Create(T item);
 
-        Person FindByID(long id);
+        T FindByID(long id);
 
-        Person Update(Person person);
+        T Update(T item);
 
         void Delete(long id);
 
-        List<Person> FindAll();
+        List<T> FindAll();
     }
 }

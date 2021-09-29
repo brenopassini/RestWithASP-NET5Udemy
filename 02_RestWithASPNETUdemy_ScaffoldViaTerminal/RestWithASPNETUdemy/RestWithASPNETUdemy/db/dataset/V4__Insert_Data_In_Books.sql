@@ -1,0 +1,16 @@
+﻿INSERT INTO books (author, launch_date, price, title) VALUES
+	('Michael C. Feathers', getdate(), 49.00, 'Working effectively with legacy code'),
+	('Ralph Johnson, Erich Gamma, John Vlissides e Richard Helm', getdate(), 45.00, 'Design Patterns'),
+	('Robert C. Martin',getdate(), 77.00, 'Clean Code'),
+	('Crockford', getdate(), 67.00, 'JavaScript'),
+	('Steve McConnell', getdate(), 58.00, 'Code complete'),
+	('Martin Fowler e Kent Beck', getdate(), 88.00, 'Refactoring'),
+	('Eric Freeman, Elisabeth Freeman, Kathy Sierra, Bert Bates', getdate(), 110.00, 'Head First Design Patterns'),
+	('Eric Evans', getdate(), 92.00, 'Domain Driven Design'),
+	('Brian Goetz e Tim Peierls', getdate(), 80.00, 'Java Concurrency in Practice'),
+	('Susan Cain', getdate(), 123.00, 'O poder dos quietos'),
+	('Roger S. Pressman', getdate(), 56.00, 'Engenharia de Software: uma abordagem profissional'),
+	('Viktor Mayer-Schonberger e Kenneth Kukier', getdate(), 54.00, 'Big Data: como extrair volume, variedade, velocidade e valor da avalanche de informação cotidiana'),
+	('Richard Hunter e George Westerman', getdate(), 95.00, 'O verdadeiro valor de TI'),
+	('Marc J. Schiller', getdate(), 45.00, 'Os 11 segredos de líderes de TI altamente influentes'),
+	('Aguinaldo Aragon Fernandes e Vladimir Ferraz de Abreu', getdate(), 54.00, 'Implantando a governança de TI');
