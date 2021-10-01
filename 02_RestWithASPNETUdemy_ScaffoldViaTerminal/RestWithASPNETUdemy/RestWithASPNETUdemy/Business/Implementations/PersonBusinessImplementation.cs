@@ -1,4 +1,6 @@
-﻿using RestWithASPNETUdemy.Model;
+﻿using RestWithASPNETUdemy.Data.Converter.Implementation;
+using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Model;
 using RestWithASPNETUdemy.Model.Context;
 using RestWithASPNETUdemy.Repository;
 using System;
@@ -11,15 +13,19 @@ namespace RestWithASPNETUdemy.Business.Implementations
     public class PersonBusinessImplementation : IPersonBusiness
     {
         private readonly IRepository<Person> _personRepository;
+        private readonly PersonConverter converter;
 
         public PersonBusinessImplementation(IRepository<Person> personRepository)
         {
             _personRepository = personRepository;
+            converter = new PersonConverter();
         }
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            return this._personRepository.Create(person);
+            var personEntity = converter.Parser(person);
+            personEntity = _personRepository.Create(personEntity);
+            return converter.Parser(personEntity);
         }
 
         public void Delete(long id)
@@ -27,20 +33,21 @@ namespace RestWithASPNETUdemy.Business.Implementations
             this._personRepository.Delete(id);
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return _personRepository.FindAll().ToList();
+            return converter.Parser(_personRepository.FindAll().ToList());
         }
 
-        public Person FindByID(long id)
+        public PersonVO FindByID(long id)
         {
-            return this._personRepository.FindByID(id);
+            return converter.Parser(this._personRepository.FindByID(id));
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            this._personRepository.Update(person);
-            return person;
+            var personEntity = converter.Parser(person);
+            personEntity = _personRepository.Update(personEntity);
+            return converter.Parser(personEntity);
         }
     }
 }
