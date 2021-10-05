@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Data.VO;
@@ -14,6 +15,7 @@ namespace RestWithASPNETUdemy.Controllers
     [ApiController]
     [ApiVersion("1")]
     [Route("api/[controller]/v{version:apiVersion}")]
+    [Authorize("Bearer")]
     public class BookController : ControllerBase
     {
         private readonly ILogger<BookController> _logger;
