@@ -1,11 +1,6 @@
 ﻿using RestWithASPNETUdemy.Hypermedia;
 using RestWithASPNETUdemy.Hypermedia.Abstract;
-using RestWithASPNETUdemy.Model.Base;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace RestWithASPNETUdemy.Data.VO
 {
