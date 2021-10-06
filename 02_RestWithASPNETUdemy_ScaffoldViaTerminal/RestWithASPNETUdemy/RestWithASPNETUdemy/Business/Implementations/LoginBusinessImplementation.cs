@@ -40,7 +40,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
             var refreshToken = _tokenService.GenerateRefreshToken();
 
             user.RefreshToken = refreshToken;
-            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpire);
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(_configuration.DaysToExpiry);
 
             _repository.RefreshUserInfo(user);
 
@@ -49,6 +49,38 @@ namespace RestWithASPNETUdemy.Business.Implementations
 
 
             return new TokenVO(true, createDate.ToString(DATE_FORMAT), expirationDate.ToString(DATE_FORMAT), accessToken, refreshToken);
+        }
+
+        public TokenVO ValidateCredentials(TokenVO token)
+        {
+            var accessToken = token.AccessToken;
+            var refreshToken = token.RefreshToken;
+
+            var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
+
+            var username = principal.Identity.Name;
+
+            var user = _repository.ValidateCredentials(username);
+
+            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now) return null;
+
+            accessToken = _tokenService.GenerateAccessToken(principal.Claims);
+            refreshToken = _tokenService.GenerateRefreshToken();
+
+            user.RefreshToken = refreshToken;
+
+            _repository.RefreshUserInfo(user);
+
+            DateTime createDate = DateTime.Now;
+            DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+
+
+            return new TokenVO(true, createDate.ToString(DATE_FORMAT), expirationDate.ToString(DATE_FORMAT), accessToken, refreshToken);
+        }
+
+        public bool RevokeToken(string username)
+        {
+            return _repository.RevokeToken(username);
         }
     }
 }

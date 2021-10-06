@@ -21,7 +21,8 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementation
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
                 Address = origin.Address,
-                Gender = origin.Gender
+                Gender = origin.Gender,
+                Enabled = origin.Enabled
             };
         }
         public PersonVO Parser(Person origin)
@@ -34,7 +35,8 @@ namespace RestWithASPNETUdemy.Data.Converter.Implementation
                 FirstName = origin.FirstName,
                 LastName = origin.LastName,
                 Address = origin.Address,
-                Gender = origin.Gender
+                Gender = origin.Gender,
+                Enabled = origin.Enabled
             };
         }
 

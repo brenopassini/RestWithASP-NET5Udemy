@@ -26,12 +26,31 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult Signin([FromBody] UserVO user)
         {
             if (user == null) return BadRequest("Invalid Client Request");
-
             var token = _loginBusiness.ValidateCredentials(user);
-
             if (token == null) return Unauthorized();
-
             return Ok(token);
+        }
+
+        [HttpPost]
+        [Route("refresh")]
+        public IActionResult Refresh([FromBody] TokenVO tokenVO)
+        {
+            if (tokenVO == null) return BadRequest("Invalid Client Request");
+            var token = _loginBusiness.ValidateCredentials(tokenVO);
+            if (token == null) return BadRequest("Invalid Client Request");
+            return Ok(token);
+        }
+
+        [HttpGet]
+        [Authorize("Bearer")]
+        [Route("revoke")]
+        public IActionResult Revoke()
+        {
+            var username = User.Identity.Name;
+            var result = _loginBusiness.RevokeToken(username);
+
+            if (!result) return BadRequest("Invalid Client Request");
+            return NoContent();
         }
     }
 }

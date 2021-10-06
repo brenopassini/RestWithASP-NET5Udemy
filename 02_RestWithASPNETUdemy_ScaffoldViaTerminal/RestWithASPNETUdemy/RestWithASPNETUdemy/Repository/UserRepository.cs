@@ -28,7 +28,7 @@ namespace RestWithASPNETUdemy.Repository
 
         public User RefreshUserInfo(User user)
         {
-            if (_context.Users.Any(u => u.Id.Equals(user.Id))) return null;
+            if (!_context.Users.Any(u => u.Id.Equals(user.Id))) return null;
 
             var result = _context.Users.SingleOrDefault(p => p.Id.Equals(user.Id));
 
@@ -54,6 +54,23 @@ namespace RestWithASPNETUdemy.Repository
             Byte[] inputBytes = Encoding.UTF8.GetBytes(input);
             Byte[] hashedBytes = algorithm.ComputeHash(inputBytes);
             return BitConverter.ToString(hashedBytes);
+        }
+
+        public User ValidateCredentials(string username)
+        {
+            return _context.Users.SingleOrDefault(u => (u.UserName == username));
+        }
+
+        public bool RevokeToken(string username)
+        {
+            var user = _context.Users.SingleOrDefault(u => (u.UserName == username));
+
+            if (user is null) return false;
+
+            user.RefreshToken = null;
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

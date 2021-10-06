@@ -17,6 +17,8 @@ namespace RestWithASPNETUdemy.Business
 
         void Delete(long id);
 
+        PersonVO Disable(long id);
+
         List<PersonVO> FindAll();
     }
 }

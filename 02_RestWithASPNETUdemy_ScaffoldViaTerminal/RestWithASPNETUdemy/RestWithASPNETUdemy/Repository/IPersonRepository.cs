@@ -7,14 +7,8 @@ using System.Threading.Tasks;
 
 namespace RestWithASPNETUdemy.Repository
 {
-    public interface IUserRepository
+    public interface IPersonRepository : IRepository<Person>
     {
-        User ValidateCredentials(UserVO user);
-
-        User ValidateCredentials(string username);
-
-        User RefreshUserInfo(User user);
-
-        bool RevokeToken(string username);
+        Person Disable(long id);
     }
 }
