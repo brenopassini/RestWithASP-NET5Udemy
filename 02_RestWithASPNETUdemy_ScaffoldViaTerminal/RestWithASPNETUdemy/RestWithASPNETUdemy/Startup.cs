@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Rewrite;
@@ -9,6 +10,7 @@ using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -117,12 +119,15 @@ namespace RestWithASPNETUdemy
 
             services.AddApiVersioning();
 
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPersonRepository, PersonRepository>();
+            services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
             services.AddTransient<ITokenService, TokenService>();
         }
