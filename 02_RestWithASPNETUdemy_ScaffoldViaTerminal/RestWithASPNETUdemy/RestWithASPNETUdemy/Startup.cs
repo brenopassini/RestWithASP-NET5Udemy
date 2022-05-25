@@ -99,10 +99,10 @@ namespace RestWithASPNETUdemy
             var connection = Configuration["SqlServerConnection:SqlServerConnectionString"];
 
 
-            if (Environment.IsDevelopment())
-            {
-                MigrateDataBase(connection);
-            }
+            //if (Environment.IsDevelopment())
+            //{
+            //    MigrateDataBase(connection);
+            //}
 
             services.AddDbContext<SqlServerContext>(options => options.UseSqlServer(connection));
 
